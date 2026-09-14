@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rossmann Sales Forecast</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Rossmann Sales Forecast</h1>
+      <p class="subtitle">Predict daily sales for an individual store.</p>
+
+      <form id="forecastForm">
+        <label>Store ID
+          <input id="store" type="number" min="1" value="1" required>
+        </label>
+
+        <label>Date
+          <input id="date" type="date" required>
+        </label>
+
+        <label>Open
+          <select id="open">
+            <option value="1">Open</option>
+            <option value="0">Closed</option>
+          </select>
+        </label>
+
+        <label>Promo
+          <select id="promo">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </label>
+
+        <label>School Holiday
+          <select id="school_holiday">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </label>
+
+        <button type="submit">Forecast Sales</button>
+      </form>
+
+      <div id="result" class="result hidden"></div>
+    </section>
+  </main>
+
+<script>
+document.getElementById("forecastForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const payload = {
+    store: Number(document.getElementById("store").value),
+    date: document.getElementById("date").value,
+    open: Number(document.getElementById("open").value),
+    promo: Number(document.getElementById("promo").value),
+    school_holiday: Number(document.getElementById("school_holiday").value),
+    state_holiday: "0"
+  };
+
+  const result = document.getElementById("result");
+  result.classList.remove("hidden");
+  result.textContent = "Calculating...";
+
+  const response = await fetch("/predict", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(payload)
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    result.textContent = "Error: " + data.error;
+    return;
+  }
+
+  result.innerHTML =
+    `<span>Predicted sales</span><strong>${data.predicted_sales.toLocaleString()}</strong>`;
+});
+</script>
+</body>
+</html>
