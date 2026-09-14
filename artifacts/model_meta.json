@@ -1,0 +1,60 @@
+{
+  "features": [
+    "Store",
+    "DayOfWeek",
+    "Open",
+    "Promo",
+    "SchoolHoliday",
+    "CompetitionDistance",
+    "CompetitionOpenSinceMonth",
+    "CompetitionOpenSinceYear",
+    "Promo2",
+    "Promo2SinceWeek",
+    "Promo2SinceYear",
+    "Year",
+    "Month",
+    "Day",
+    "WeekOfYear",
+    "DayOfYear",
+    "IsMonthStart",
+    "IsMonthEnd",
+    "IsWeekend",
+    "CompetitionOpenMonths",
+    "Promo2AgeWeeks",
+    "Promo2Active",
+    "Promo2StartMonthFlag",
+    "StateHoliday",
+    "StoreType",
+    "Assortment",
+    "SalesLag1",
+    "SalesLag7",
+    "SalesLag14",
+    "SalesLag28",
+    "SalesRoll7",
+    "SalesRoll14",
+    "SalesRoll28"
+  ],
+  "category_mappings": {
+    "StateHoliday": {
+      "0": 0,
+      "a": 1,
+      "b": 2,
+      "c": 3
+    },
+    "StoreType": {
+      "a": 0,
+      "b": 1,
+      "c": 2,
+      "d": 3
+    },
+    "Assortment": {
+      "a": 0,
+      "b": 1,
+      "c": 2
+    }
+  },
+  "validation_cutoff": "2015-06-19",
+  "validation_rmspe": 0.10793603712298565,
+  "best_iteration": 624,
+  "target_transform": "log1p"
+}
